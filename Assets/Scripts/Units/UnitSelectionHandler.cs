@@ -45,13 +45,15 @@ public class UnitSelectionHandler : MonoBehaviour
 
     private void StartSelectionArea()
     {
-        // start box selection
-        foreach(Unit selectedUnit in SelectedUnits)
+        if(!Keyboard.current.leftShiftKey.isPressed) // if it is pressed then don't clear, to select more than one multiselect box/individual
         {
-            selectedUnit.Deselect();
-        }
+            foreach (Unit selectedUnit in SelectedUnits)
+            {
+                selectedUnit.Deselect();
+            }
 
-        SelectedUnits.Clear();
+            SelectedUnits.Clear();
+        }
 
         unitSelectionArea.gameObject.SetActive(true);
 
@@ -102,9 +104,11 @@ public class UnitSelectionHandler : MonoBehaviour
 
         foreach(Unit unit in player.GetPlayerUnits())
         {
+            if(SelectedUnits.Contains(unit)) continue; // skip this unit(to don't added it again to list of selectedunits+ to don't reselect it) and continue to next unit
+
             Vector3 screenPosition = mainCamera.WorldToScreenPoint(unit.transform.position);
 
-            if(min.x < screenPosition.x && max.x > screenPosition.x && min.y < screenPosition.y && max.y > screenPosition.y)
+            if(screenPosition.x > min.x  && screenPosition.x < max.x && screenPosition.y > min.y && screenPosition.y < max.y)
             {
                 SelectedUnits.Add(unit);
                 unit.Select();
