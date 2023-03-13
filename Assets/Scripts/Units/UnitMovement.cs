@@ -9,12 +9,28 @@ public class UnitMovement : NetworkBehaviour
 {
     [SerializeField] private NavMeshAgent agent = null;
     [SerializeField] private Targeter targeter = null;
+    [SerializeField] float chaseRange = 10f;
 
     #region Server
 
     [ServerCallback]
     private void Update() 
     {
+        Targetable target = targeter.GetTarget();
+
+        if(target != null)
+        {
+            if((target.transform.position - transform.position).sqrMagnitude > chaseRange * chaseRange) // better in performance than Vector3.Distance() -> uses sqr root
+            {
+                agent.SetDestination(target.transform.position);
+            }
+            else if(agent.hasPath)
+            {
+                agent.ResetPath();
+            }
+            return;
+        }
+
         if(!agent.hasPath) return;
         if(agent.remainingDistance > agent.stoppingDistance) return;
 
