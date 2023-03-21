@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5320834898775389674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.61, z: 2.677}
+  m_LocalPosition: {x: 0, y: 1.699, z: 2.747}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 6661767980242821083}
   - component: {fileID: 3409411046630764031}
   - component: {fileID: 5003705001711324976}
+  - component: {fileID: 1663529945696315187}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -359,6 +360,22 @@ MonoBehaviour:
   fireRate: 1
   fireRange: 11
   rotationSpeed: 180
+--- !u!114 &1663529945696315187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026897466125723346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eae6b71a71d9fb4b893200cf0df988e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  maxHealth: 100
 --- !u!1 &7722559330449904242
 GameObject:
   m_ObjectHideFlags: 0
