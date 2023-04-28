@@ -58,7 +58,9 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask))
         {
-            // spawn the building
+            // Place the building
+
+            player.CmdTryPlaceBuilding(building.GetId(), hit.point);
         }
 
         Destroy(buildingPreviewInstance);
@@ -70,7 +72,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         
         if(!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, floorMask)) return;
 
-        buildingPreviewInstance.transform.position = hit.point;
+        buildingPreviewInstance.transform.position = hit.point; // update building preview position based on mouse position
 
         if(!buildingPreviewInstance.activeSelf)
         {
