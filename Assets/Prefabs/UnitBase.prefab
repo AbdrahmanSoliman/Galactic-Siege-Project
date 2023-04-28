@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2723942360479644281
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9212931792477596753}
-  m_Layer: 0
-  m_Name: UnitSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9212931792477596753
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2723942360479644281}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7637366619741231000}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7413531836444536671
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,8 +199,7 @@ PrefabInstance:
         type: 3}
       propertyPath: icon
       value: 
-      objectReference: {fileID: -2413806693520163455, guid: 616cfc1cbaaa90045b03d97a83e14c10,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2763665298807101959, guid: 34f8df3a828b06c4bb9703a3b2bc9261,
         type: 3}
       propertyPath: price
@@ -250,25 +218,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5739805339828784541}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1840954825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7637366619741230983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03870c7fc09ccd6418f84e9bb2cbf3ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0.1
-  health: {fileID: 7637366619741231004}
-  unitPrefab: {fileID: 6026897466125723346, guid: b1610a68f92bcdb48a028e3a63ab5ffb,
-    type: 3}
-  unitSpawnPoint: {fileID: 9212931792477596753}
 --- !u!114 &1840954826
 MonoBehaviour:
   m_ObjectHideFlags: 0
