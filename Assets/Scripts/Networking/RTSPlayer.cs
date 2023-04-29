@@ -57,7 +57,6 @@ public class RTSPlayer : NetworkBehaviour
         }
 
         return false;
-
     }
 
     #region Server
