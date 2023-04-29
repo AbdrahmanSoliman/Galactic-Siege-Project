@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class RTSPlayer : NetworkBehaviour
 {
-    [SerializeField] private float buildingRange = 5f;
+    [SerializeField] private float buildingRangeLimit = 5f;
     [SerializeField] private LayerMask buildingBlockLayer;
     [SerializeField] private Building[] Buildings;
 
@@ -50,7 +50,7 @@ public class RTSPlayer : NetworkBehaviour
         // is it in the range near any of other bldgs?
         foreach(Building building in myBuildings)
         {
-            if((building.transform.position - point).sqrMagnitude <= buildingRange * buildingRange)
+            if((point - building.transform.position).sqrMagnitude <= buildingRangeLimit * buildingRangeLimit)
             {
                 return true;
             }
