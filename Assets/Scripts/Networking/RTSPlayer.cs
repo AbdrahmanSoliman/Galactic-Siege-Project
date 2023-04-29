@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class RTSPlayer : NetworkBehaviour
 {
+    [SerializeField] private float buildingRange = 5f;
+    [SerializeField] private LayerMask buildingBlockLayer;
     [SerializeField] private Building[] Buildings;
 
     [SyncVar(hook = nameof(ClientHandleResourcesUpdated))]
@@ -35,6 +37,27 @@ public class RTSPlayer : NetworkBehaviour
     public void SetResources(int newResources)
     {
         resources = newResources;
+    }
+
+    public bool CanPlaceBuilding(BoxCollider boxCollider, Vector3 point)
+    {
+        // does the new bldg will/is colliding with another exisiting bldg/objects/units?
+        if(Physics.CheckBox(point + boxCollider.center, boxCollider.size / 2, Quaternion.identity, buildingBlockLayer))
+        {
+            return false;
+        }
+
+        // is it in the range near any of other bldgs?
+        foreach(Building building in myBuildings)
+        {
+            if((building.transform.position - point).sqrMagnitude <= buildingRange * buildingRange)
+            {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
     #region Server
@@ -71,9 +94,19 @@ public class RTSPlayer : NetworkBehaviour
 
         if(buildingToPlace == null) return; // building id doesn't match any of the buildings' ids in the Buildings list = didn't add bldg to list
 
+        // have enough resources?
+        if(resources < buildingToPlace.GetPrice()) return;
+
+        BoxCollider boxCollider = buildingToPlace.gameObject.GetComponent<BoxCollider>();
+
+        // Check if it can place or not depending on overlapping with another object, and in a range near to other buildings or not
+        if(!CanPlaceBuilding(boxCollider, point)) return;
+
         GameObject buildingInstance = Instantiate(buildingToPlace.gameObject, point, buildingToPlace.transform.rotation);
 
         NetworkServer.Spawn(buildingInstance, connectionToClient); //spawning and assigning the building to their particular player
+
+        SetResources(resources - buildingToPlace.GetPrice());
     }
 
     private void ServerHandleUnitSpawned(Unit unit)
