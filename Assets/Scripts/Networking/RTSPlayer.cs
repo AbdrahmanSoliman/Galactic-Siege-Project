@@ -164,7 +164,7 @@ public class RTSPlayer : NetworkBehaviour
         Unit.AuthorityOnUnitSpawned += AuthorityHandleUnitSpawned;
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
         Building.AuthorityOnBuildingSpawned += AuthorityHandleBuildingSpawned;
-        Building.AuthorityOnBuildingSpawned += AuthorityHandleBuildingDespawned;
+        Building.AuthorityOnBuildingDespawned += AuthorityHandleBuildingDespawned;
     }
 
     public override void OnStopClient()
@@ -174,7 +174,7 @@ public class RTSPlayer : NetworkBehaviour
         Unit.AuthorityOnUnitSpawned -= AuthorityHandleUnitSpawned;
         Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
         Building.AuthorityOnBuildingSpawned -= AuthorityHandleBuildingSpawned;
-        Building.AuthorityOnBuildingSpawned -= AuthorityHandleBuildingDespawned;
+        Building.AuthorityOnBuildingDespawned -= AuthorityHandleBuildingDespawned;
     }
 
     private void ClientHandleResourcesUpdated(int oldResources, int newResources)
