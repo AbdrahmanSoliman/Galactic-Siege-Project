@@ -138,6 +138,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  cameraTransfrom: {fileID: 8229244735327459486}
   buildingRangeLimit: 5
   buildingBlockLayer:
     serializedVersion: 2
