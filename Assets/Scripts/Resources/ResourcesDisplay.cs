@@ -32,6 +32,6 @@ public class ResourcesDisplay : MonoBehaviour
 
     private void ClientHandleResourcesUpdated(int resources)
     {
-        resourcesText.text = $"Resources: {resources}";
+        resourcesText.text = $"{resources}";
     }
 }

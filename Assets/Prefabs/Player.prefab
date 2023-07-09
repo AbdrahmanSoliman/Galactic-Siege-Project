@@ -54,7 +54,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 60
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -139,13 +139,14 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   cameraTransfrom: {fileID: 8229244735327459486}
-  buildingRangeLimit: 5
+  buildingRangeLimit: 10
   buildingBlockLayer:
     serializedVersion: 2
     m_Bits: 321
   Buildings:
-  - {fileID: 7637366619741231002, guid: c613a7b3c23258644903d5ca0eaae0c8, type: 3}
+  - {fileID: 244401084173197065, guid: 2adbd709d3696054eb002dfa2ef8f7f2, type: 3}
   - {fileID: 7637366619741231002, guid: 06387149f2c601040aa2cf7290e33e63, type: 3}
+  - {fileID: 244401084173197065, guid: 8ee7ca7174a067b49b5824db51b1713e, type: 3}
 --- !u!114 &4301020995078149621
 MonoBehaviour:
   m_ObjectHideFlags: 0
