@@ -7,11 +7,86 @@ using UnityEngine.SceneManagement;
 
 public class RTSNetworkManager : NetworkManager
 {
-    [SerializeField] private GameObject unitSpawnerPrefab = null;
+    [SerializeField] private GameObject unitBasePrefab = null;
     [SerializeField] private GameOverHandler gameoverHandlerPrefab = null;
 
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisconnected;
+
+    private bool isGameInProgress;
+
+    public List<RTSPlayer> Players { get; } = new List<RTSPlayer>();
+
+    #region Server
+
+    public override void OnServerConnect(NetworkConnectionToClient conn)
+    {
+        if (!isGameInProgress) return;
+        // game is in progress already, then kick who tries to join during the game
+        conn.Disconnect();
+    }
+
+    public override void OnServerDisconnect(NetworkConnectionToClient conn)
+    {
+        RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
+
+        Players.Remove(player);
+
+        base.OnServerDisconnect(conn);
+    }
+    
+
+    public override void OnStopServer()
+    {
+        Players.Clear();
+
+        isGameInProgress = false;
+    }
+
+    public void StartGame()
+    {
+        if(Players.Count < 2) return;
+
+        isGameInProgress = true;
+
+        ServerChangeScene("Scene_Map_01");
+    }
+
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+    {
+        base.OnServerAddPlayer(conn);
+
+        // Setting random team color for each player
+        RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
+
+        Players.Add(player);
+
+        player.SetTeamColor(new Color(UnityEngine.Random.Range(0f,1f), UnityEngine.Random.Range(0f,1f), UnityEngine.Random.Range(0f,1f)));
+
+        // Set Party Owner if there is only one player in the lobby, which will be the host, happens at the beginning when a player start a lobby
+        player.SetPartyOwner(Players.Count == 1);
+    }
+
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        if(SceneManager.GetActiveScene().name.StartsWith("Scene_Map"))
+        {
+            GameOverHandler gameOverHandlerInstance = Instantiate(gameoverHandlerPrefab);
+
+            NetworkServer.Spawn(gameOverHandlerInstance.gameObject);
+
+            foreach(RTSPlayer player in Players)
+            {
+                GameObject baseInstance = Instantiate(unitBasePrefab, GetStartPosition().position, Quaternion.identity);
+
+                NetworkServer.Spawn(baseInstance, player.connectionToClient);
+            }
+        }
+    }
+
+    #endregion
+
+    #region Client
 
     public override void OnClientConnect()
     {
@@ -27,23 +102,11 @@ public class RTSNetworkManager : NetworkManager
         ClientOnDisconnected?.Invoke();
     }
 
-
-    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+    public override void OnStopClient()
     {
-        base.OnServerAddPlayer(conn);
-
-        // Setting random team color for each player
-        RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
-        player.SetTeamColor(new Color(UnityEngine.Random.Range(0f,1f), UnityEngine.Random.Range(0f,1f), UnityEngine.Random.Range(0f,1f)));
+        Players.Clear();
     }
 
-    public override void OnServerSceneChanged(string sceneName)
-    {
-        if(SceneManager.GetActiveScene().name.StartsWith("Scene_Map"))
-        {
-            GameOverHandler gameOverHandlerInstance = Instantiate(gameoverHandlerPrefab);
+    #endregion
 
-            NetworkServer.Spawn(gameOverHandlerInstance.gameObject);
-        }
-    }
 }
