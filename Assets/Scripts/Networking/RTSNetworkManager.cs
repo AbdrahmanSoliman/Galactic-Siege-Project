@@ -61,6 +61,8 @@ public class RTSNetworkManager : NetworkManager
 
         Players.Add(player);
 
+        player.SetDisplayName($"Player {Players.Count}");
+
         player.SetTeamColor(new Color(UnityEngine.Random.Range(0f,1f), UnityEngine.Random.Range(0f,1f), UnityEngine.Random.Range(0f,1f)));
 
         // Set Party Owner if there is only one player in the lobby, which will be the host, happens at the beginning when a player start a lobby
