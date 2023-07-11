@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4625456196768491551}
   - component: {fileID: 4625456196768491548}
-  - component: {fileID: 4625456196768491549}
+  - component: {fileID: 5887782364122211674}
+  - component: {fileID: 1897199903}
+  - component: {fileID: 1897199902}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -52,9 +54,9 @@ MonoBehaviour:
   sendRate: 30
   offlineScene: Assets/Scenes/Scene_Menu.unity
   onlineScene: 
-  transport: {fileID: 4625456196768491549}
+  transport: {fileID: 5887782364122211674}
   networkAddress: localhost
-  maxConnections: 100
+  maxConnections: 4
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 3336496058650807398, guid: ea153bbb3bf8fc94592d87c45b69025c,
     type: 3}
@@ -70,12 +72,22 @@ MonoBehaviour:
   - {fileID: 4331954421406711851, guid: 439ef328979c71c47a7fb8f04f972dac, type: 3}
   - {fileID: 3638506929639940298, guid: 4557a74395421504b8010e87c344ca0c, type: 3}
   - {fileID: 244401084173197076, guid: 8ee7ca7174a067b49b5824db51b1713e, type: 3}
+  snapshotSettings:
+    bufferTimeMultiplier: 2
+    catchupNegativeThreshold: -1
+    catchupPositiveThreshold: 1
+    catchupSpeed: 0.019999999552965164
+    slowdownSpeed: 0.03999999910593033
+    driftEmaDuration: 1
+    dynamicAdjustment: 1
+    dynamicAdjustmentTolerance: 1
+    deliveryTimeEmaDuration: 2
   timeInterpolationGui: 0
   unitBasePrefab: {fileID: 7637366619741230983, guid: c60f9d37e793a6f4f8a20509188bee63,
     type: 3}
   gameoverHandlerPrefab: {fileID: 3639250901566107081, guid: 0762866986089c04aaf50b5109e2d52a,
     type: 3}
---- !u!114 &4625456196768491549
+--- !u!114 &5887782364122211674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,18 +96,51 @@ MonoBehaviour:
   m_GameObject: {fileID: 4625456196768491539}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   port: 7777
+  DualMode: 1
   NoDelay: 1
-  SendTimeout: 5000
-  ReceiveTimeout: 30000
-  serverMaxMessageSize: 16384
-  serverMaxReceivesPerTick: 10000
-  serverSendQueueLimitPerConnection: 10000
-  serverReceiveQueueLimitPerConnection: 10000
-  clientMaxMessageSize: 16384
-  clientMaxReceivesPerTick: 1000
-  clientSendQueueLimit: 10000
-  clientReceiveQueueLimit: 10000
+  Interval: 10
+  Timeout: 10000
+  RecvBufferSize: 7361536
+  SendBufferSize: 7361536
+  FastResend: 2
+  ReceiveWindowSize: 4096
+  SendWindowSize: 4096
+  MaxRetransmit: 40
+  MaximizeSocketBuffers: 1
+  ReliableMaxMessageSize: 297433
+  UnreliableMaxMessageSize: 1195
+  debugLog: 0
+  statisticsGUI: 0
+  statisticsLog: 0
+--- !u!114 &1897199903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625456196768491539}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ab5293af4d2c74382a08696282bdb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1897199902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625456196768491539}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channels: 0200000001000000
+  Timeout: 25
+  AllowSteamRelay: 1
+  UseNextGenSteamNetworking: 1
