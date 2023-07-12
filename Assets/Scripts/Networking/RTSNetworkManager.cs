@@ -114,7 +114,12 @@ public class RTSNetworkManager : NetworkManager
 
     private string RandomPlayerName()
     {
-        string[] playerNames = {"Abdelrahman","Ramy","Snake","Abyss","Aether","Alpha","Apex","Archon","Ascendant","Bane","Chaos","Chimera","Chronos",
+        if(Players.Count == 1) 
+        {
+            return "Abdelrahman";
+        }
+
+        string[] playerNames = {"Ramy","Snake","Abyss","Aether","Alpha","Apex","Archon","Ascendant","Bane","Chaos","Chimera","Chronos",
         "Crimson","Dawn","Eclipse","Erebus","Ember","Enigma","Equinox","Flux","Genesis","Hades","Indigo","Ion","Iris","Kairos","Kether","Leviathan",
         "Lux","Malice","Nebula","Nexus","Onyx","Paradox","Phoenix","Prime","Prism","Revenant","Rift","Sage","Sol","Tempest","Umbra","Valor","Vortex",
         "Void","Xerxes","Zenith"};

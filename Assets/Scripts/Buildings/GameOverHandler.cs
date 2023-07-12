@@ -39,9 +39,10 @@ public class GameOverHandler : NetworkBehaviour
 
         // Game over
 
-        int playerId = bases[0].connectionToClient.connectionId;
+        //int playerId = bases[0].connectionToClient.connectionId;
+        string playerName = bases[0].connectionToClient.identity.GetComponent<RTSPlayer>().GetDisplayName();
 
-        RpcGameOver($"Player {playerId}");
+        RpcGameOver($"{playerName}");
 
         ServerOnGameOver?.Invoke();
     }
