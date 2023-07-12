@@ -61,9 +61,10 @@ public class RTSNetworkManager : NetworkManager
 
         Players.Add(player);
 
-        player.SetDisplayName($"Player {Players.Count}");
-
         player.SetTeamColor(new Color(UnityEngine.Random.Range(0f,1f), UnityEngine.Random.Range(0f,1f), UnityEngine.Random.Range(0f,1f)));
+
+        //player.SetDisplayName($"Player {Players.Count}");
+        player.SetDisplayName(RandomPlayerName());
 
         // Set Party Owner if there is only one player in the lobby, which will be the host, happens at the beginning when a player start a lobby
         player.SetPartyOwner(Players.Count == 1);
@@ -110,5 +111,17 @@ public class RTSNetworkManager : NetworkManager
     }
 
     #endregion
+
+    private string RandomPlayerName()
+    {
+        string[] playerNames = {"Abdelrahman","Ramy","Snake","Abyss","Aether","Alpha","Apex","Archon","Ascendant","Bane","Chaos","Chimera","Chronos",
+        "Crimson","Dawn","Eclipse","Erebus","Ember","Enigma","Equinox","Flux","Genesis","Hades","Indigo","Ion","Iris","Kairos","Kether","Leviathan",
+        "Lux","Malice","Nebula","Nexus","Onyx","Paradox","Phoenix","Prime","Prism","Revenant","Rift","Sage","Sol","Tempest","Umbra","Valor","Vortex",
+        "Void","Xerxes","Zenith"};
+
+        int randomIndex = UnityEngine.Random.Range(0, playerNames.Length);
+
+        return playerNames[randomIndex];
+    }
 
 }

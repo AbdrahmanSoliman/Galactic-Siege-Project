@@ -11,6 +11,7 @@ public class LobbyMenu : MonoBehaviour
     [SerializeField] private GameObject lobbyUI;
     [SerializeField] private Button startGameBtn;
     [SerializeField] private List<TMP_Text> playersNameTexts;
+    [SerializeField] private List<Image> playerColorImage;
 
     private void Start() 
     {
@@ -34,12 +35,14 @@ public class LobbyMenu : MonoBehaviour
         for (int i = 0; i < players.Count; i++)
         {
             playersNameTexts[i].text = players[i].GetDisplayName();
+            playerColorImage[i].color = players[i].GetTeamColor();
         }
 
         // Assigning waiting for players name for others UI names if there is empty slot
         for (int i = players.Count; i < playersNameTexts.Count; i++)
         {
             playersNameTexts[i].text = "Waiting For Player...";
+            playerColorImage[i].color = Color.white;
         }
 
         startGameBtn.interactable = players.Count >= 2;
