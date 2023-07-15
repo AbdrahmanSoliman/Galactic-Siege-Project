@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 9aff7a5063fc3cb4d9285dfbdd0636f8
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - MAVIS
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 446927058433d9344874ec4b3c192f28, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
